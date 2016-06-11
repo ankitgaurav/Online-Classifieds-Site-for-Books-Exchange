@@ -1,0 +1,34 @@
+.icons
+{
+	float: right;
+}
+.left
+{
+}
+.notification_container
+{
+	min-height: 50px;
+}
+.col-content
+{
+}
+.display_time
+{
+	float: right;
+}
+ul
+{
+	list-style-type: none;
+}
+li
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+hr
+{
+	height:1px;
+	border:none;
+	color:#CCC;
+	background-color:#CCC;
+}
