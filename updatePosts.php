@@ -31,12 +31,12 @@ else{
 
 $query = "SELECT * FROM post $where AND user_id<> '0' AND deleted=false";
 $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
-                        $targetpage = "home";
+                        $targetpage = "index.php";
                         $limit = 7;
                         if(isset($_GET['page'])){
                             $page = $_GET['page'];
                             $start = ($page - 1) * $limit;
-                        }   
+                        }
                         else{
                             $page = 0;
                             $start = 0;
@@ -45,7 +45,7 @@ $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
                         $sql = "SELECT * FROM post $where AND user_id<> '0' AND deleted=false limit 6";
                         $row = mysqli_query($conn,$sql);
                         while($posts = mysqli_fetch_assoc($row)){
-                            $link='book_details?p_id='.$posts["post_id"];
+                            $link='book_details.php?p_id='.$posts["post_id"];
                              if($posts["post_type"]=="donate"){
                                 $price = "Free: On Donate";
                             }
@@ -63,7 +63,7 @@ $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
                             echo "<div style='display:block;' href='$link' class='latest_posts alert alert-default'>";
                             if ($posts['post_category']=="Academic" or $posts['post_category']=="uncategorized") {
                                 echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-leanpub" style="color:#777777"></i></div>';
-                            } 
+                            }
                             elseif($posts['post_category']=="Novel"){
                                 echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-book" style="color:#7C6F62;"></i></div>';
                             }
@@ -104,7 +104,7 @@ $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
                                 echo '<div class="col-md-10"><h4 style="text-transform:capitalize;"><a href='.$link.'>'.$posts['post_name']." ".$author.'</a><a href="'.$link.'"role="button" class="pull-right btn btn-xs btn-default"style="font-size: 14px;">See more</a></h4>';
                                 echo '<p><small ><span class="text-success">' . $price . '</span> &nbsp;<span class="pull-right"><i class="fa fa-clock-o"></i> '.$time.'</span><br><i class="fa fa-institution"></i> '.$institution.' &nbsp;&nbsp;<i class="fa fa-map-marker"></i> '.$user_locality.'</small></p>';
                             }
-                            
+
 
                                 //block for creating the tags string starts here
                                 $tags = "";
@@ -142,12 +142,12 @@ $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
                             echo '<ul class="pager">';
                             if ($page == 0) $page = 1;
                             $prev = $page - 1;
-                            $next = $page + 1; 
+                            $next = $page + 1;
                             $lastpage = ceil($total_pages/$limit);
                             $lpm1 = $lastpage - 1;
                             $pagination = "";
                             if($lastpage > 1)
-                            { 
+                            {
                                 if($page>1){
                                     echo '<li class="previous"><a href="'.$targetpage.'?page='.$prev.'">Newer</a></li>';
                                 }

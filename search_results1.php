@@ -37,7 +37,7 @@ include ('files/config.php');
 				        <span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
 				    </button>
-				        <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
+				        <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
 				            <strong>handybooks</strong>
 				            <small id="in" style="visibility:hidden;">.in</small>
 				        </a>
@@ -49,13 +49,13 @@ include ('files/config.php');
 
 						if (isset($_SESSION["email"]))
 						{
-						echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages</a></li>
+						echo '<li><a href="messages.php"><i class="fa fa-comments"></i> Messages</a></li>
 						<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> ' . $_SESSION["name"] . '<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-						<li><a href="dashboard">Profile</a></li>
-						<li><a href="dashboard?to=transactions">Transactions</a></li>
-						<li><a href="dashboard?to=book_requests">Book Requests</a></li>
+						<li><a href="dashboard.php">Profile</a></li>
+						<li><a href="dashboard.php?to=transactions">Transactions</a></li>
+						<li><a href="dashboard.php?to=book_requests">Book Requests</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="auth.php">Logout</a></li>
 						</ul>
@@ -67,10 +67,10 @@ include ('files/config.php');
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> Sign In<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 						<li class="dropdown-header">Existing User</li>
-						<li><a href="login">Log In</a></li>
+						<li><a href="login.php">Log In</a></li>
 						<li class="divider"></li>
 						<li class="dropdown-header">New User</li>
-						<li><a href="signup">Register</a></li>
+						<li><a href="signup.php">Register</a></li>
 						</ul>
 						</li>';
 						}
@@ -82,7 +82,7 @@ include ('files/config.php');
 		<div class="container" id="main_content">
 			<div class="row">
 				<div class="col-md-9">
-					<div class="row">    
+					<div class="row">
 						<div class="col-md-8 col-md-offset-1">
 						<form class="form-search" action="search_books" method="GET">
 							<div class="row">
@@ -99,7 +99,7 @@ include ('files/config.php');
 							</div>
 							<div class="row" id="hints"></div>
 						</form>
-						</div>            
+						</div>
 					</div>
 				</div>
 			</div>
@@ -111,16 +111,16 @@ include ('files/config.php');
 	    					$query = "SELECT * FROM post WHERE user_id<> '0' and deleted=false AND post_name LIKE '%" . $search_keyword . "%'";
 	                        $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
 	                        if ($total_pages == 0){
-								echo "<hr><h4>Sorry, there isn't any book post matching your search.<br /> You can <a href='book_request'>post a request</a> for this book and we will notify you once we have it in handybooks.</h4>";
+								echo "<hr><h4>Sorry, there isn't any book post matching your search.<br /> You can <a href='book_request.php'>post a request</a> for this book and we will notify you once we have it in handybooks.</h4>";
 							}
 							else{
 							    echo '<div style="border-bottom:1px solid #EEEEEE; padding:10px;margin-top:20px;margin-bottom:20px;">'.$total_pages .' matches<span class="pull-right">Price <i class="fa fa-sort-amount-asc"></i>&nbsp;&nbsp; Date <i class="fa fa-sort-desc"></i></span></div>';
-							    $targetpage = "search_books?search_keyword=".$search_keyword;
+							    $targetpage = "search_results.php?search_keyword=".$search_keyword;
 	                        	$limit = 5;
 		                        if(isset($_GET['page'])){
 		                            $page = $_GET['page'];
 		                            $start = ($page - 1) * $limit;
-		                        }   
+		                        }
 		                        else{
 		                            $page = 0;
 		                            $start = 0;
@@ -128,7 +128,7 @@ include ('files/config.php');
 		    				$sql = "SELECT * FROM post WHERE user_id<> '0' and deleted=false AND post_name LIKE '%" . $search_keyword . "%' ORDER BY post_time DESC LIMIT $start, $limit";
 	                        $row = mysqli_query($conn,$sql);
 	                        while($posts = mysqli_fetch_assoc($row)){
-	                            $link='book_details?p_id='.$posts["post_id"];
+	                            $link='book_details.php?p_id='.$posts["post_id"];
 	                             if($posts["post_type"]=="donate"){
 	                                $price = "Free: On Donate";
 	                            }
@@ -144,7 +144,7 @@ include ('files/config.php');
 	                            echo "<div style='display:block;' href='$link' class='latest_posts alert alert-default'>";
 	                            if ($posts['post_category']=="Academic" or $posts['post_category']=="uncategorized") {
 	                                echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-leanpub" style="color:#777777"></i></div>';
-	                            } 
+	                            }
 	                            elseif($posts['post_category']=="Novel"){
 	                                echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-book" style="color:#7C6F62;"></i></div>';
 	                            }
@@ -214,12 +214,12 @@ include ('files/config.php');
 	                            echo '<ul class="pager">';
 	                            if ($page == 0) $page = 1;
 	                            $prev = $page - 1;
-	                            $next = $page + 1; 
+	                            $next = $page + 1;
 	                            $lastpage = ceil($total_pages/$limit);
 	                            $lpm1 = $lastpage - 1;
 	                            $pagination = "";
 	                            if($lastpage > 1)
-	                            { 
+	                            {
 	                                if($page>1){
 	                                    echo '<li class="previous"><a href="'.$targetpage.'&page='.$prev.'">Newer</a></li>';
 	                                }
@@ -245,11 +245,11 @@ include ('files/config.php');
 	            	<div class="row">
 	            		<div id="Request_div" style="margin-left:20px;margin-top:20px;border:1px solid #EEEEEE;padding:20px;border-radius:5px;">
 		            		<h4 class="text-success">Didn't Get the Book You Searched for?</h4>
-		            		<p>You can <a href="book_request">Post a Request</a> for it.<br>We will deliver you the book at 50% of its MRP within 2-3 days.</p>
+		            		<p>You can <a href="book_request.php">Post a Request</a> for it.<br>We will deliver you the book at 50% of its MRP within 2-3 days.</p>
 		            		<a role="button" class="btn btn-primary btn-lg cta_btns" href="book_request.php"><strong>Request for a Book &nbsp;</strong><i class="fa fa-shopping-cart"></i></a><br>
 	            		</div>
 	            	</div>
-	            	
+
 	            </div>
 			</div>
 		</div>

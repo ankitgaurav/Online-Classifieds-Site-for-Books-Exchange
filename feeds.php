@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'files/config.php';
 if(isset($_SESSION[ 'user_id'])){
     $user_id=$_SESSION[ "user_id"];
@@ -8,8 +8,12 @@ if(isset($_SESSION[ 'user_id'])){
     if(isset($_SESSION[ 'user_id'])){
         $one=1;$user_id=$_SESSION[ "user_id"];
         $sql190="SELECT * FROM chats WHERE (to_user='$user_id' and displayble='$one' and to_user_read=0) " ;
-        $result190=mysqli_query($conn,$sql190)or mysqli_error($conn);
-        $_SESSION[ 'no_of_unread_msg']=mysqli_num_rows($result190);
+        if($result190=mysqli_query($conn,$sql190)){
+          $_SESSION[ 'no_of_unread_msg']=mysqli_num_rows($result190);
+        }else{
+          $_SESSION[ 'no_of_unread_msg']=0;
+        }
+
         $no_of_msg=$_SESSION[ 'no_of_unread_msg'];
         }
         else{
@@ -107,7 +111,7 @@ if(isset($_SESSION[ 'user_id'])){
                 <ul class="nav navbar-nav navbar-right">
                     <li class=active><a href=home><i class="fa fa-home"></i> Home </a>
                     </li>
-                    <?php if(isset($_SESSION[ "user_id"])){echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages';if($no_of_msg){echo "<span class='badge'>".$no_of_msg. "</span>";};echo '</a></li>        
+                    <?php if(isset($_SESSION[ "user_id"])){echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages';if($no_of_msg){echo "<span class='badge'>".$no_of_msg. "</span>";};echo '</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> '.$_SESSION[ "name"]. '<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -160,7 +164,7 @@ if(isset($_SESSION[ 'user_id'])){
                         if(isset($_GET['page'])){
                             $page = $_GET['page'];
                             $start = ($page - 1) * $limit;
-                        }   
+                        }
                         else{
                             $page = 0;
                             $start = 0;
@@ -187,7 +191,7 @@ if(isset($_SESSION[ 'user_id'])){
                             echo "<div style='display:block;' href='$link' class='latest_posts alert alert-default'>";
                             if ($posts['post_category']=="Academic" or $posts['post_category']=="uncategorized") {
                                 echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-leanpub" style="color:#777777"></i></div>';
-                            } 
+                            }
                             elseif($posts['post_category']=="Novel"){
                                 echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-book" style="color:#7C6F62;"></i></div>';
                             }
@@ -228,7 +232,7 @@ if(isset($_SESSION[ 'user_id'])){
                                 echo '<div class="col-md-10"><h4 style="text-transform:capitalize;"><a href='.$link.'>'.$posts['post_name']." ".$author.'</a><a href="'.$link.'"role="button" class="pull-right btn btn-xs btn-default"style="font-size: 14px;">See more</a></h4>';
                                 echo '<p><small ><span class="text-success">' . $price . '</span> &nbsp;<span class="pull-right"><i class="fa fa-clock-o"></i> '.$time.'</span><br><i class="fa fa-institution"></i> '.$institution.' &nbsp;&nbsp;<i class="fa fa-map-marker"></i> '.$user_locality.'</small></p>';
                             }
-                            
+
 
                                 //block for creating the tags string starts here
                                 $tags = "";
@@ -266,12 +270,12 @@ if(isset($_SESSION[ 'user_id'])){
                             echo '<ul class="pager">';
                             if ($page == 0) $page = 1;
                             $prev = $page - 1;
-                            $next = $page + 1; 
+                            $next = $page + 1;
                             $lastpage = ceil($total_pages/$limit);
                             $lpm1 = $lastpage - 1;
                             $pagination = "";
                             if($lastpage > 1)
-                            { 
+                            {
                                 if($page>1){
                                     echo '<li class="previous"><a href="'.$targetpage.'?page='.$prev.'">Newer</a></li>';
                                 }
@@ -316,7 +320,7 @@ if(isset($_SESSION[ 'user_id'])){
                 <div style=display:none id=request_div>
                     <?php $sql52="SELECT * FROM requests LIMIT 6" ;$row52=mysqli_query($conn,$sql52);while($extract52=mysqli_fetch_assoc($row52)){echo '<div class="requests" style="display: block;
     border-bottom: 1px solid #EEEEEE; margin-bottom:5px; padding-bottom:3px;"><strong>'.$extract52[ "req_name"]. '</strong><br>'.$extract52[ "req_description"]. '</div>';}?> </div>
-                <br> 
+                <br>
                 <!-- <a role=button href=post_a_book class="btn btn-success btn-xs btn-block"><h4>Post a Free Ad for your book</h4></a> -->
                 <div style="margin-top:10px;padding:10px;border:1px #eee solid;border-radius:3px;height:auto;width:100%">
                     <h3 class="text-success">What keeps you waiting?</h3>
@@ -1567,7 +1571,7 @@ if(isset($_SESSION[ 'user_id'])){
                     <ul>
                         <li>
                             <a href="http://twitter.com/handybooksin"><span>
-                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp; 
+                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp;
                     </span>Follow us on twitter
                     </a>
                         </li>

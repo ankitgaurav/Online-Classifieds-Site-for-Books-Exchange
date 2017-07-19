@@ -27,14 +27,14 @@ if(isset($_POST["login_email"])){
                     $_SESSION["user_id"] = $row['user_id'];
                     $_SESSION["email"] = $row['email'];
                     $_SESSION["name"] = $row['name'];
-                    
+
                     header("Location:$redir");
                 }
                 else{
-                    
+
                     $msg = "Wrong password";
                     header("Location:login.php?from=feeds");
-                }            
+                }
         }
         else{
             $msg = "Email id not yet registered!";
@@ -59,7 +59,7 @@ if(isset($_POST["login_email"])){
             //hashing passwords
             $password = password_hash($password, PASSWORD_DEFAULT);
             //checking if email exists
-            $result = $conn->query('SELECT user_id FROM users WHERE email ="'.$email.'"');        
+            $result = $conn->query('SELECT user_id FROM users WHERE email ="'.$email.'"');
             $count = $result->num_rows;
             if($count==0){
                 //data insert here
@@ -82,7 +82,7 @@ if(isset($_POST["login_email"])){
                     include ('signup_mail.php');
                     header('Location:dashboard?msg=greetings');
                 }
-                else 
+                else
                 {
                     $form = true;
                     $msg = "Something went wrong. Data could not be inserted properly" . $conn->error;
@@ -93,7 +93,7 @@ if(isset($_POST["login_email"])){
                 $name = $name;
                 $msg="Email id already taken";
             }
-            
+
         }
     }
             else{
@@ -148,7 +148,7 @@ if($form == true){
         }
 
     </style>
-    
+
     <script>
 function on_m_dn(){
 document.getElementById("password").type = "text";
@@ -158,7 +158,7 @@ document.getElementById("password").type = "password";
 }
 
 function showHint(str) {
-    if (str.length == 0) { 
+    if (str.length == 0) {
         document.getElementById("inner").innerHTML = "";
         document.getElementById("hints").style.display = "none";
         return;
@@ -176,7 +176,7 @@ function showHint(str) {
 }
         function save_user_info(){
                 var name = edit_form.name.value;
-                var institution = edit_form.institution.value;                
+                var institution = edit_form.institution.value;
                 var city = edit_form.city.value;
                 var feeds = "feeds";
                 var xmlhttp = new XMLHttpRequest();
@@ -219,7 +219,7 @@ function showHint(str) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-                <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
+                <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
                     <strong>handybooks</strong>
                     <small id="in" style="visibility:hidden;">.in</small>
                 </a>
@@ -229,7 +229,7 @@ function showHint(str) {
         <ul class="nav navbar-nav navbar-right">
         <!-- <a href="post_a_book" class="btn btn-primary navbar-btn navbar-left" style="margin-right:5px;" id="post_ad_btn">Sell a Book</a> -->
         <li>
-            <a href="how_it_works"><strong>HOW IT WORKS</strong></a>
+            <a href="how_it_works.php"><strong>HOW IT WORKS</strong></a>
         </li>
         <li>
             <a href="#content"><strong>BROWSE</strong></a>
@@ -246,7 +246,7 @@ function showHint(str) {
                   <input type = "password" class="form-control input-md" name="login_password" placeholder="Password" required>
                 </div>
                   <input type="submit" class="form-control btn btn-md btn-primary" value="Login">
-                  
+
               </form>
             </li>
           </ul>
@@ -277,7 +277,7 @@ function showHint(str) {
                         </div></div>
                         <div class="form-group">
                             <input class="btn btn-primary" role="button" type="submit" value="Sign up"><br>
-                            <small>By signing up, you agree to the <a href="terms"><u>Terms of Use</u></a> of handybooks</small>
+                            <small>By signing up, you agree to the <a href="terms.php"><u>Terms of Use</u></a> of handybooks</small>
                         </div>
                     </form>
                 </div>
@@ -289,7 +289,7 @@ function showHint(str) {
             <div class="container" id="content" style="padding-top:20px;">
             <div class="col-md-4" style="background-color:#FAFAFA;padding-bottom:20px;">
             <h4>Search or Browse Old Books</h4>
-            <form class="form-search" action="search_results" method="GET">                
+            <form class="form-search" action="search_results" method="GET">
                 <div class="input-group input-group-md" id="search_box">
                 <input type="text" name="search_keyword" placeholder="Title, Author or Genre" onkeyup="showHint(this.value)" value="" class="form-control" onfocus="showHints()" required autocomplete="off">
                 <span class="input-group-btn">
@@ -301,7 +301,7 @@ function showHint(str) {
                 </div>
                 <div id="hints"></div>
             </form>
-            
+
             <div  id="browse_categories" style="margin-top:10px;padding:10px;border:1px #EEEEEE solid;border-radius:3px;height:auto;width:100%">
                 <!-- <button type="button" class="btn btn-default browse-buttons " value= "Engineering"onclick="loadfeeds(this)">Engineering</button> -->
                 <button type   ="button" class="btn btn-default browse-buttons" href="#" value= "Computer Scinece Engineering" onclick="loadfeeds(this)">Computer Scinece</button>
@@ -312,21 +312,21 @@ function showHint(str) {
                 <button type="button" class="btn btn-default browse-buttons" value= "Information Technology Engineering" onclick="loadfeeds(this)">IT Engineering</button>
                 <button type="button" class="btn btn-default browse-buttons" value= "civil Engineering" onclick="loadfeeds(this)">Civil Engineering</button>
                 <button type="button" class="btn btn-default browse-buttons" value= "Electronics and Communication Engineering" onclick="loadfeeds(this)">Electronics & Communication </button>
-                
+
                 <button type="button" class="btn btn-default browse-buttons" value= "Any Branch" onclick="loadfeeds(this)">Any Branch</button>
-                
+
             </div><hr>
             <h4>Share Your Old Course Books, Novels or Magazines</h4>
-            
+
             <div class="btn-group btn-group btn-group-justified" role="group" aria-label="...">
-                <a role="button" href="post_a_book" class="btn btn-default" ><strong class=" text-success">Sell A Book</strong></a>
-                <a role="button" href="post_a_book" class="btn btn-default" ><strong class=" text-success">Donate</strong></a>
-                <a role="button" href="post_a_book" class="btn btn-default" ><strong class=" text-success">Exchange</strong></a>
+                <a role="button" href="post_ad11.php" class="btn btn-default" ><strong class=" text-success">Sell A Book</strong></a>
+                <a role="button" href="post_ad11.php" class="btn btn-default" ><strong class=" text-success">Donate</strong></a>
+                <a role="button" href="post_ad11.php" class="btn btn-default" ><strong class=" text-success">Exchange</strong></a>
             </div>
-            </div>   
+            </div>
 
 <!--             right content
- --> 
+ -->
             <div class="col-md-8" id="posts_lists"><h4>
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="active">
@@ -336,17 +336,17 @@ function showHint(str) {
                         <a href="#">Latest Book Requests</a>
                     </li>
                 </ul></h4><br>
-                    <div id="latest_posts_div">         
+                    <div id="latest_posts_div">
                     <?php
                     //for pagination and displaying latest posts
                         $query = "SELECT * FROM post WHERE user_id<> '0' and deleted=false";
                         $total_pages = mysqli_num_rows(mysqli_query($conn,$query));
-                        $targetpage = "home";
+                        $targetpage = "index.php";
                         $limit = 5;
                         if(isset($_GET['page'])){
                             $page = $_GET['page'];
                             $start = ($page - 1) * $limit;
-                        }   
+                        }
                         else{
                             $page = 0;
                             $start = 0;
@@ -355,7 +355,7 @@ function showHint(str) {
                             $sql = "SELECT * FROM post WHERE user_id<> '0' and deleted=false ORDER BY post_time DESC LIMIT $start, $limit";
                             $row = mysqli_query($conn,$sql);
                             while($posts = mysqli_fetch_assoc($row)){
-                                $link='book_details?p_id='.$posts["post_id"];
+                                $link='book_details.php?p_id='.$posts["post_id"];
                                  if($posts["post_type"]=="donate"){
                                     $price = "Free: On Donate";
                                 }
@@ -373,7 +373,7 @@ function showHint(str) {
                                 echo "<div style='display:block;' href='$link' class='latest_posts alert alert-default'>";
                                 if ($posts['post_category']=="Academic" or $posts['post_category']=="uncategorized") {
                                     echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-leanpub" style="color:#777777"></i></div>';
-                                } 
+                                }
                                 elseif($posts['post_category']=="Novel"){
                                     echo '<div class="row"><div class="col-md-2"><i class="fa fa-5x fa-book" style="color:#7C6F62;"></i></div>';
                                 }
@@ -423,55 +423,55 @@ function showHint(str) {
                             echo '<ul class="pager">';
 if ($page == 0) $page = 1;
 $prev = $page - 1;
-$next = $page + 1; 
+$next = $page + 1;
 $lastpage = ceil($total_pages/$limit);
 $lpm1 = $lastpage - 1;
 $pagination = "";
 if($lastpage > 1)
-{ 
+{
     if($page>1){
         echo '<li class="previous"><a href="'.$targetpage.'?page='.$prev.'">Newer</a></li>';
     }
     else{
         echo '<li class="previous"><a role="button" class="btn btn-default "href="'.$targetpage.'?page='.$prev.'" disabled="disabled">Newer</a></li>';
     }
-    if ($page < $lastpage) 
+    if ($page < $lastpage)
         echo '<li class="next"><a href="'.$targetpage.'?page='.$next.'">Older</a></li>';
     else
         echo '<li class="next"><a href="'.$targetpage.'?page='.$next.'" role="button" class="btn btn-default"disabled="disabled">Older</a></li>';
 }
-    
+
                     echo '</ul>';
                     ?>
                     </div>
                     <!--latest_posts_div ends-->
                     <div id="latest_requests_div">
-                        
+
                     </div>
             </div>
 
-<!--                 right content ends here-->            
-            </div> 
+<!--                 right content ends here-->
             </div>
-            <!-- Content div ends here--> 
+            </div>
+            <!-- Content div ends here-->
         </div></div></div>
         <div id="footer" style= "margin-bottom:0px;">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" id="footer-main">
-                <ul> 
+                <ul>
                     <li>
-                        <a href=<?php echo htmlspecialchars('about_us');?>>:: About Us ::</a>
-                    </li> 
+                        <a href=<?php echo htmlspecialchars('about_us.php');?>>:: About Us ::</a>
+                    </li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('about_us');?>>The Story ::</a></li> 
+                        <a href=<?php echo htmlspecialchars('about_us.php');?>>The Story ::</a></li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('terms');?>>Terms ::</a>
-                    </li> 
+                        <a href=<?php echo htmlspecialchars('terms.php');?>>Terms ::</a>
+                    </li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('terms');?>>Privacy Policy ::</a>
+                        <a href=<?php echo htmlspecialchars('terms.php');?>>Privacy Policy ::</a>
                     </li>
                     <li>
                         <a href=<?php echo htmlspecialchars('http://facebook.com/handybooks');?>><i class="fa fa-facebook-official fa-2x    "></i></a>
-                    </li>                    
+                    </li>
                 </ul>
             </div>
         </div>
@@ -496,7 +496,7 @@ if($lastpage > 1)
       }
       function loadfeeds(val)
       {
-        $('.browse-buttons').on("click",function(){  
+        $('.browse-buttons').on("click",function(){
         $('.browse-buttons').not(this).removeClass('active');
         $(this).toggleClass('active');
         });
@@ -514,9 +514,9 @@ if($lastpage > 1)
         xmlhttp.open("GET", "loadfeeds.php?category="+val1, true);
         xmlhttp.send();
 
-       
+
     }
-      </script>     
+      </script>
 
     </body>
 </html>

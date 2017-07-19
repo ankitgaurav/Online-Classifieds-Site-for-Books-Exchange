@@ -9,7 +9,7 @@ else{
     $msg=null;
 }
 if(isset($_SESSION["user_id"])){
-    header('Location:dashboard');
+    header('Location:dashboard.php');
 }
 else{
     //checking if form has been sent
@@ -24,7 +24,7 @@ else{
             //hashing passwords
             $password = password_hash($password, PASSWORD_DEFAULT);
             //checking if email exists
-            $result = $conn->query('SELECT user_id FROM users WHERE email ="'.$email.'"');        
+            $result = $conn->query('SELECT user_id FROM users WHERE email ="'.$email.'"');
             $count = $result->num_rows;
             if($count==0){
                 //data insert here
@@ -47,7 +47,7 @@ else{
                     include ('signup_mail.php');
                     header('Location:dashboard?msg=greetings');
                 }
-                else 
+                else
                 {
                     $form = true;
                     $msg = "Something went wrong. Data could not be inserted properly" . $conn->error;
@@ -58,7 +58,7 @@ else{
                 $name = $name;
                 $msg="Email id already taken";
             }
-            
+
         }
     }
             else{
@@ -99,22 +99,22 @@ if($form == true){
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text"><strong>handybooks</strong><small id="in" style="visibility:hidden;">.in</small></a>
+                    <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text"><strong>handybooks</strong><small id="in" style="visibility:hidden;">.in</small></a>
                 </div>
                 <div>
                     <ul class="nav navbar-nav navbar-right">
-                    <li><a href="home"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 <!-- Signup container -->
-        <div class="container">            
+        <div class="container">
             <div class="row">
-          <div class="col-sm-6 col-sm-offset-3">            
+          <div class="col-sm-6 col-sm-offset-3">
             <div class="panel panel-success">
             <div class="panel-heading"><h3 class="tagline"><strong>Register here</strong></h3></div>
-        <div class="panel-body">                
+        <div class="panel-body">
                 <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
 <!--show message here-->
@@ -126,10 +126,10 @@ $msg
             }
 
 ?>
-<!-- End of message--> 
+<!-- End of message-->
             <form role="form" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"])."?sgn_up";?>' method="post"><br>
                 <div class="form-group"><label for="name" style="display:none">Name</label>
-                <div class="input-group">                
+                <div class="input-group">
                     <input id="name" class="input-md col-lg-2 form-control" type="text" placeholder="What is your name?" name="name" autofocus required <?php
                             if(isset($name)){
                                 echo 'value="'.$name.'"';
@@ -139,7 +139,7 @@ $msg
                 </div>
                 </div>
                 <div class="form-group"><label for="email" style="display:none">Email</label>
-                <div class="input-group">                
+                <div class="input-group">
                     <input id="email" class="input-md col-lg-2 form-control" type="email" placeholder="Enter your email-id" name="email" required><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 </div>
                 </div>
@@ -151,36 +151,36 @@ $msg
                 </div>
                 <div class="form-group">
                 <button type="submit" class="btn btn-info btn-md form-control" value="Signup">Sign up &nbsp;<i class="fa fa-user-plus"></i></button>
-                </div><span>Already registered? <a href="login">Login Instead</a></span>
+              </div><span>Already registered? <a href="login.php">Login Instead</a></span>
                 <br><br>
             </form>
-            </div>            
-        </div>            
-        </div>            
+            </div>
+        </div>
+        </div>
         </div></div>
-        </div></div>   
+        </div></div>
          <div id="footer" style="margin-top:100px;margin-bottom:0px;">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" id="footer-main">
-                <ul> 
+                <ul>
                     <li>
-                        <a href=<?php echo htmlspecialchars('about_us');?>>:: About Us ::</a>
-                    </li> 
+                        <a href=<?php echo htmlspecialchars('about_us.php');?>>:: About Us ::</a>
+                    </li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('about_us');?>>The Story ::</a></li> 
+                        <a href=<?php echo htmlspecialchars('about_us.php');?>>The Story ::</a></li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('terms');?>>Terms ::</a>
-                    </li> 
+                        <a href=<?php echo htmlspecialchars('terms.php');?>>Terms ::</a>
+                    </li>
                     <li>
-                        <a href=<?php echo htmlspecialchars('terms');?>>Privacy Policy ::</a>
-                    </li> 
+                        <a href=<?php echo htmlspecialchars('terms.php');?>>Privacy Policy ::</a>
+                    </li>
                     <li>
                         <a href="https://www.facebook.com/handybooks"><i class="fa fa-1x fa-facebook-official"></i>
                     </li>
-                </ul> 
-                
-            
+                </ul>
+
+
             </div>
-        </div>         
+        </div>
     </body>
 </html>
 <?php

@@ -20,40 +20,41 @@ else{
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-    if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your image is too large.";
-    $uploadOk = 0;
-}
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
-}
-if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-  $msg = "Sorry, there was an error uploading your file.";
-      $form = true;
-    } 
-    else {
-        $form = false;
-        $sql = "INSERT INTO post (user_id, post_category, post_name, post_author, post_year, post_department, post_description, post_price, image_path, image_upload) VALUES ('$user_id', '$post_category', '$post_name', '$post_author', '$post_year', '$post_department', '$post_description', '$post_price', '$target_file', 1)";
-        if($result = mysqli_query($conn,$sql)){
-          $last_post_id = $conn->insert_id;
-          $_SESSION["last_post_id"]=$last_post_id;
-          header('Location:dashboard?to=transactions');
+        if($check !== false) {
+          echo "File is an image - " . $check["mime"] . ".";
+          $uploadOk = 1;
         }
-        else{
-          $msg = "Sorry, your ad could not be posted successfully.<br>Please try again.";
+        else if($_FILES["fileToUpload"]["size"] > 500000) {
+          echo "Sorry, your image is too large.";
+          $uploadOk = 0;
+        }
+        else {
+          echo "File is not an image.";
+          $uploadOk = 0;
+        }
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            $uploadOk = 0;
+        }
+        if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+          $msg = "Sorry, there was an error uploading your file.";
           $form = true;
         }
-      }
-
+        else {
+          $form = false;
+          $sql = "INSERT INTO post (user_id, post_category, post_name, post_author, post_year, post_department, post_description, post_price, image_path, image_upload) VALUES ('$user_id', '$post_category', '$post_name', '$post_author', '$post_year', '$post_department', '$post_description', '$post_price', '$target_file', 1)";
+          if($result = mysqli_query($conn,$sql)){
+            $last_post_id = $conn->insert_id;
+            $_SESSION["last_post_id"]=$last_post_id;
+            header('Location:dashboard?to=transactions');
+          }
+          else{
+            $msg = "Sorry, your ad could not be posted successfully.<br>Please try again.";
+            echo "Error error".$conn->error;
+            $form = true;
+          }
+        }
       }
       else{//non-academic form process
         $user_id = $_SESSION["user_id"];
@@ -68,40 +69,39 @@ if (!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
         $check = getimagesize($_FILES["fileToUpload_na"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-    if ($_FILES["fileToUpload_na"]["size"] > 500000) {
-    echo "Sorry, your image is too large.";
-    $uploadOk = 0;
-}
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
-}
-if (!move_uploaded_file($_FILES["fileToUpload_na"]["tmp_name"], $target_file)) {
-  $msg = "Sorry, there was an error uploading your file.";
-      $form = true;
-    } 
-    else {
-        $form = false;
-        $sql = "INSERT INTO post (user_id, post_category, post_name, post_author,post_genre, post_description, post_price, image_upload, image_path) VALUES ('$user_id', '$post_category', '$post_name', '$post_author', '$post_genre', '$post_description', '$post_price', 1, '$target_file')";
-        if($result = mysqli_query($conn,$sql)){
-          $last_post_id = $conn->insert_id;
-          $_SESSION["last_post_id"]=$last_post_id;
-          header('Location:dashboard?to=transactions');
+        if($check !== false) {
+          echo "Yaha se File is an image - " . $check["mime"] . ".";
+          $uploadOk = 1;
+        } else {
+          echo "File is not an image.";
+          $uploadOk = 0;
         }
-        else{
-          $msg = "Sorry, your ad could not be posted successfully.<br>Please try again.";
+        if ($_FILES["fileToUpload_na"]["size"] > 500000) {
+            echo "Sorry, your image is too large.";
+            $uploadOk = 0;
+        }
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+          echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+          $uploadOk = 0;
+        }
+        if (!move_uploaded_file($_FILES["fileToUpload_na"]["tmp_name"], $target_file)) {
+          $msg = "Sorry, there was an error uploading your file.";
           $form = true;
         }
-      }
-        
+        else {
+          $form = false;
+          $sql = "INSERT INTO post (user_id, post_category, post_name, post_author,post_genre, post_description, post_price, image_upload, image_path) VALUES ('$user_id', '$post_category', '$post_name', '$post_author', '$post_genre', '$post_description', '$post_price', 1, '$target_file')";
+          if($result = mysqli_query($conn,$sql)){
+            $last_post_id = $conn->insert_id;
+            $_SESSION["last_post_id"]=$last_post_id;
+            header('Location:dashboard?to=transactions');
+          }
+          else{
+            $msg = "Sorry, your ad could not be posted successfully.<br>Please try again.";
+            $form = true;
+          }
+        }
       }
     }
     else{
@@ -158,15 +158,18 @@ if (!move_uploaded_file($_FILES["fileToUpload_na"]["tmp_name"], $target_file)) {
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav navbar-right">
-               <?php 
-      if(isset($_SESSION["user_id"])){ 
+               <?php
+      if(isset($_SESSION["user_id"])){
       $one=1;
       $user_id=$_SESSION["user_id"];
       //code for unread messages
       $sql190 = "SELECT * FROM chats WHERE (to_user='$user_id' and displayble='$one' and to_user_read=0) ";
-      $result190 = mysqli_query($conn,$sql190) or mysqli_error($conn);
-      $_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
-      $no_of_msg=$_SESSION['no_of_unread_msg'];
+      if($result190 = mysqli_query($conn,$sql190)){
+        $_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
+      }else{
+        $_SESSION['no_of_unread_msg']= 0;
+      }
+            $no_of_msg=$_SESSION['no_of_unread_msg'];
       //end of code for unread messages
       echo '
               <li><a href="home"><i class="fa fa-home"></i> Home</a></li>
@@ -174,7 +177,7 @@ if (!move_uploaded_file($_FILES["fileToUpload_na"]["tmp_name"], $target_file)) {
                    if ($no_of_msg) {
                               echo "<span class='badge'>".$no_of_msg."</span>";
                           };
-                  echo '</a></li>        
+                  echo '</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> '.$_SESSION["name"].'
                 <span class="caret"></span></a>
@@ -219,7 +222,7 @@ if($form == true){
       </ul>
 
       <div class="tab-content">
-        <!--   Academic section starts here-->    
+        <!--   Academic section starts here-->
           <div id="Academic" class="tab-pane fade in active">
               <form name="academic_form" role="form" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method="POST" enctype="multipart/form-data">
                 <input type="text" id="b_category" name="post_a_category" style="display:none;" value="Academic">
@@ -234,7 +237,7 @@ if($form == true){
           <div class="col-sm-6"><label for="book_author">Author or Publication</label>
             <input id="book_author" class="input-md form-control" type="text"  name="post_a_author">
           </div>
-        </div> 
+        </div>
         <div class="row form-group">
                   <div class="col-sm-6">
                     <label for="book_year">Year, Class or Semester</label>
@@ -255,7 +258,7 @@ if($form == true){
                         <option>Seventh Semester</option>
                         <option>Eighth Semester</option>
                       </datalist>
-                  </div>        
+                  </div>
                   <div class="col-sm-6"><label for="book_department">Department or Subject</label>
                     <input class="input-md col-md-4 form-control" list="b_departments" type="text"  name="post_a_department">
                       <datalist id="b_departments">

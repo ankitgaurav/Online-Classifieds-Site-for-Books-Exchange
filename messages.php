@@ -7,8 +7,12 @@ if(!isset($_SESSION["user_id"])){
  $one=1;
 $user_id=$_SESSION["user_id"];
 $sql190 = "SELECT * FROM chats WHERE (to_user='$user_id' and displayble='$one' and to_user_read=0) ";
-$result190 = mysqli_query($conn,$sql190) or mysqli_error($conn);
-$_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
+if($result190 = mysqli_query($conn,$sql190)){
+  $_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
+}else{
+  $_SESSION['no_of_unread_msg']= 0;
+}
+
 $no_of_msg=$_SESSION['no_of_unread_msg'];
 
 //end of code for unread messages
@@ -54,7 +58,7 @@ function openChat(thread,row){
     if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200 ){
               document.getElementById("chats").innerHTML = xmlhttp2.responseText;
             }
-  }  
+  }
   xmlhttp2.open('POST', 'logs.php?to_user='+to_user, true);
   xmlhttp2.send();
 }
@@ -72,7 +76,7 @@ function sendChat(){
   }
   var to_user = chat.to_user.value;
   var msg = chat.msg.value;
-  chat.msg.value = "";  
+  chat.msg.value = "";
   var xmlhttp = new XMLHttpRequest();
     document.getElementById("chats").innerHTML = '<center><i class="fa fa-3x fa-spinner fa-pulse" style="position:absolute;top:50px;"></i></center>';
 
@@ -128,14 +132,14 @@ if(to_user!=""){
 <!-- Messages container -->
     <div class="container" id="main_content">
       <aside class="col-sm-3 menu" style="height:100%;border-right:1px solid #C6C6C6; padding-right:0px;border-left:1px solid #C6C6C6;padding-left:0px;">
-        <h4 style="padding-left:10px;">Conversations</h4><hr>          
+        <h4 style="padding-left:10px;">Conversations</h4><hr>
 <?php
   $from_user=$_SESSION["user_id"];
   $one=1;
   $sql = "SELECT DISTINCT to_user,from_user FROM chats WHERE (to_user='$from_user')  ORDER BY time DESC";
   $result = mysqli_query($conn,$sql);
   echo '<div style="display:block;height:300px;overflow-y:auto;overflow-x:hidden;"><table class="table">';
-  while($extract=mysqli_fetch_array($result)){
+  while($result && $extract=mysqli_fetch_array($result)){
       $to_show_user = $extract['from_user'];
     $sql2 = "SELECT * FROM users WHERE user_id='$to_show_user'";
     $row2 = mysqli_query($conn,$sql2);
@@ -156,7 +160,7 @@ if(to_user!=""){
       <div style="text-align:center;padding-top:50px;">No messages to display.</div><br>
       </div>
       <div class="row col-sm-10">
-        
+
       </div>
       </article>
     </div><!-- End of Container -->
@@ -200,10 +204,10 @@ if(to_user!=""){
                         Feedback
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                    
+
                 <div class="row_heading">Legal</div>
                 <ul>
                     <li><a href="terms">
@@ -215,17 +219,17 @@ if(to_user!=""){
                         Privacy
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                
+
                     <div class="row_heading">
                         Connect with Handybooks
                     </div>
-                <ul>    
+                <ul>
                     <li>
                     <a href="http://twitter.com/handybooksin"><span>
-                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp; 
+                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp;
                     </span>Follow us on twitter
                     </a>
                     </li>
@@ -242,7 +246,7 @@ if(to_user!=""){
                         Handybooks on Google+
                     </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
         </div>
         <div class="row">

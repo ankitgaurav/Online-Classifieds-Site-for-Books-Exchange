@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'files/config.php';
     if (isset($_GET["p_id"])){
         $post_id = test_input($_GET["p_id"]);
@@ -24,7 +24,7 @@
     $post_price = $book_details["post_price"];
     $post_time = $book_details["post_time"];
     $poster_id = $book_details['user_id'];
-    
+
     $sql2 = "SELECT * FROM users WHERE user_id='$poster_id'";
     $row2 = mysqli_query($conn, $sql2);
     $poster_details = mysqli_fetch_assoc($row2);
@@ -34,7 +34,7 @@
     $poster_city = $poster_details["city"];
     $poster_phone = $poster_details["phone"];
     $msg = null;
-    
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST['reply_logged'])) {
             if($_POST["reply_msg"]!=""){
@@ -114,7 +114,7 @@
                         //sending signup email to user
                         include ('signup_mail.php');
                         include("reply_email.php");
-                        $msg = "Your message has been sent successfully.<br><a href='login'>Log in</a> to see your messages.<br>Your auto-generated password is: ".$pass;
+                        $msg = "Your message has been sent successfully.<br><a href='login.php'>Log in</a> to see your messages.<br>Your auto-generated password is: ".$pass;
                         $form = true;
                         }
                     else{
@@ -128,7 +128,7 @@
                 $form = true;
             }
         }
-        
+
     }
     else{
         $form = true;
@@ -182,7 +182,7 @@
         <div class="modal-caption"><p><center><?php echo $book_details["post_name"];?></center></p></div>
     </div>
 </div>
-    
+
 </div>
  	<div class="wrapper">
 	 	<nav class="navbar navbar-default">
@@ -193,7 +193,7 @@
 	                <span class="icon-bar"></span>
 	                <span class="icon-bar"></span>
 	            </button>
-	                <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
+	                <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
 	                    <strong>handybooks</strong>
 	                    <small id="in" style="visibility:hidden;">.in</small>
 	                </a>
@@ -213,16 +213,16 @@
 	        <!-- <a href="post_a_book" class="btn btn-primary navbar-btn navbar-left" style="margin-right:5px;">Sell a Book</a> -->
 	        <?php
 	                if(isset($_SESSION["email"])){
-	                    echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages</a></li>
-	        
+	                    echo '<li><a href="messages.php"><i class="fa fa-comments"></i> Messages</a></li>
+
 	        <li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> '.$_SESSION["name"].'<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="dashboard">Profile</a></li>
-	            <li><a href="dashboard?to=transactions">Transactions</a></li>
-	            <li><a href="dashboard?to=book_requests">Book Requests</a></li>
+	            <li><a href="dashboard.php">Profile</a></li>
+	            <li><a href="dashboard.php?to=transactions">Transactions</a></li>
+	            <li><a href="dashboard.php?to=book_requests">Book Requests</a></li>
 	            <li role="separator" class="divider"></li>
-	            <li><a href="logout">Logout</a></li>
+	            <li><a href="logout.php">Logout</a></li>
 	          </ul>
 	        </li>';
 	    }
@@ -231,10 +231,10 @@
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> Sign In<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li class="dropdown-header">Existing User</li>
-	            <li><a href="login">Log In</a></li>
+	            <li><a href="login.php">Log In</a></li>
 	            <li class="divider"></li>
 	            <li class="dropdown-header">New User</li>
-	            <li><a href="signup">Register</a></li>
+	            <li><a href="signup.php">Register</a></li>
 	          </ul>
 	        </li>';
 	        }
@@ -269,7 +269,7 @@ if($post_price!=""){
 <?php
 if ($book_details["image_path"] != "")
     echo "<div style='border:1px solid #E8E8E8;padding:3px;width:160px;'><a data-toggle='modal' data-target='#show_image'><img src='" . $book_details["image_path"] . "' width='150px' height='150px'><span class='text-muted'><center>Click to zoom <i class='fa fa-eye'></i></center></span></a></div>";
-else 
+else
     echo '<i class="fa fa-book fa-5x"></i>';
 ?>
                                 </div>
@@ -308,7 +308,7 @@ if($post_description!=""){
                                             <fieldset>
                                                 <input name="poster_id" value="'.$poster_id.'" style="display:none;">
                                                 <textarea name="reply_msg" class="pure-input-1" placeholder="Reply to this book post" rows="3" required></textarea>
-                                                
+
                                             </fieldset>
                                             <div class="form-group"><button  name="reply_logged" type="submit" role="button" class="form-control btn btn-warning">Reply</button></div>
                                         </form>';
@@ -324,11 +324,11 @@ if($post_description!=""){
             </form>';
     }
 ?>
-                                    
 
-                                        
+
+
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
@@ -371,7 +371,7 @@ while($extract = mysqli_fetch_assoc($row)){
             </div>
 
 	</div>
-    
+
 <?php
 include('footer.php');
 ?>

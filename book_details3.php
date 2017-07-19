@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'files/config.php';
     if (isset($_GET["p_id"])){
         $post_id = test_input($_GET["p_id"]);
@@ -23,7 +23,7 @@
     $post_genre = $book_details["post_genre"];
     $post_price = $book_details["post_price"];
     $poster_id = $book_details['user_id'];
-    
+
     $sql2 = "SELECT * FROM users WHERE user_id='$poster_id'";
     $row2 = mysqli_query($conn, $sql2);
     $poster_details = mysqli_fetch_assoc($row2);
@@ -80,7 +80,7 @@
         <div class="modal-caption"><p><center><?php echo $book_details["post_name"];?></center></p></div>
     </div>
 </div>
-    
+
 </div>
  	<div class="wrapper">
 	 	<nav class="navbar navbar-default">
@@ -91,7 +91,7 @@
 	                <span class="icon-bar"></span>
 	                <span class="icon-bar"></span>
 	            </button>
-	                <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
+	                <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
 	                    <strong>handybooks</strong>
 	                    <small id="in" style="visibility:hidden;">.in</small>
 	                </a>
@@ -111,16 +111,16 @@
 	        <!-- <a href="post_a_book" class="btn btn-primary navbar-btn navbar-left" style="margin-right:5px;">Sell a Book</a> -->
 	        <?php
 	                if(isset($_SESSION["email"])){
-	                    echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages</a></li>
-	        
+	                    echo '<li><a href="messages.php"><i class="fa fa-comments"></i> Messages</a></li>
+
 	        <li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> '.$_SESSION["name"].'<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="dashboard">Profile</a></li>
-	            <li><a href="dashboard?to=transactions">Transactions</a></li>
-	            <li><a href="dashboard?to=book_requests">Book Requests</a></li>
+	            <li><a href="dashboard.php">Profile</a></li>
+	            <li><a href="dashboard.php?to=transactions">Transactions</a></li>
+	            <li><a href="dashboard.php?to=book_requests">Book Requests</a></li>
 	            <li role="separator" class="divider"></li>
-	            <li><a href="logout">Logout</a></li>
+	            <li><a href="logout.php">Logout</a></li>
 	          </ul>
 	        </li>';
 	    }
@@ -129,10 +129,10 @@
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> Sign In<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 	            <li class="dropdown-header">Existing User</li>
-	            <li><a href="login">Log In</a></li>
+	            <li><a href="login.php">Log In</a></li>
 	            <li class="divider"></li>
 	            <li class="dropdown-header">New User</li>
-	            <li><a href="signup">Register</a></li>
+	            <li><a href="signup.php">Register</a></li>
 	          </ul>
 	        </li>';
 	        }
@@ -151,7 +151,7 @@
 <?php
 echo $book_details["post_name"];
 echo '<span class=" pull-right text-success"><i class=""></i>On Sale for &#x20b9; '.$post_price.'</span>';
-// echo '<a role="button" id="showForm" class="btn btn-success pull-right" href="#replyForm">Reply to this post</a>';  
+// echo '<a role="button" id="showForm" class="btn btn-success pull-right" href="#replyForm">Reply to this post</a>';
 ?>                           </h3><hr>
                             <div class="row" style="padding-left:20px;margin-bottom:20px;">
 <?php
@@ -173,11 +173,11 @@ if ($book_details["image_path"] != "")
             <span class='text-muted'><center>Click to zoom <i class='fa fa-eye'></i></center></span>
             </a>
         </div>";
-else 
+else
     echo '<i class="fa fa-book fa-5x"></i>';
 ?>
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                     <h4><i class="fa fa-user"></i> <?php echo $poster_name;?></h4><hr>
                                     <h4><i class="fa fa-phone"></i> <?php echo $poster_phone;?></h4><hr>
@@ -190,7 +190,7 @@ else
                                             <div class="form-group"><button type="submit" role="button" class="form-control btn btn-warning">Reply</button></div>
                                         </form>
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
@@ -198,16 +198,16 @@ else
 <?php
 echo "<span class='text-muted'>Title:</span> " . $book_details["post_name"] . "<br/>";
 if($post_category!=""){
-    echo '<span class="text-muted">Category:</span> <a href="search_books?search_tag='.$post_category.'">'.$post_category.'</a><br>';
+    echo '<span class="text-muted">Category:</span> <a href="search_results.php?search_tag='.$post_category.'">'.$post_category.'</a><br>';
 }
 if($post_department!=""){
-    echo '<span class="text-muted">Department:</span> <a href="search_books?search_tag='.$post_department.'">'.$post_department.'</a><br>';
+    echo '<span class="text-muted">Department:</span> <a href="search_results.php?search_tag='.$post_department.'">'.$post_department.'</a><br>';
 }
 if($post_year!=""){
-    echo '<span class="text-muted">Year/Class:</span> <a href="search_books?search_tag='.$post_year.'">'.$post_year.'</a><br>';
+    echo '<span class="text-muted">Year/Class:</span> <a href="search_results.php?search_tag='.$post_year.'">'.$post_year.'</a><br>';
 }
 if($post_genre!=""){
-    echo '<span class="text-muted">Genre:</span> <a href="search_books?search_tag='.$post_genre.'">'.$post_genre.'</a><br>';
+    echo '<span class="text-muted">Genre:</span> <a href="search_results.php?search_tag='.$post_genre.'">'.$post_genre.'</a><br>';
 }
 if($post_description!=""){
     echo "<span class='text-muted'>Description:</span> " . $post_description.'<br>';
@@ -243,7 +243,7 @@ while($extract = mysqli_fetch_assoc($row)){
             </div>
 
 	</div>
-    
+
 <?php
 include('footer.php');
 ?>

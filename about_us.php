@@ -75,7 +75,7 @@
                 <span class=icon-bar></span>
                 <span class=icon-bar></span>
             </button>
-            <a href=home onmouseover="document.getElementById('in').style.visibility='visible'" onmouseout="document.getElementById('in').style.visibility='hidden'" class=logo_text>
+            <a href=index.php onmouseover="document.getElementById('in').style.visibility='visible'" onmouseout="document.getElementById('in').style.visibility='hidden'" class=logo_text>
                 <strong>handybooks</strong>
                 <small id=in style=visibility:hidden>.in</small>
             </a>
@@ -83,16 +83,16 @@
         <div class="collapse navbar-collapse" id=myNavbar>
             <ul class="nav navbar-nav navbar-right" style=margin-right:20px>
                 <li class="active">
-                    <a href="about_us">About Us</a>
+                    <a href="about_us.php">About Us</a>
                 </li>
                 <li>
-                    <a href="our_story">The Story</a>
+                    <a href="our_story.php">The Story</a>
                 </li>
                 <li>
-                    <a href="terms">Our Terms</a>
+                    <a href="terms.php">Our Terms</a>
                 </li>
                 <li>
-                    <a href="privacy">Privacy Policy</a>
+                    <a href="privacy.php">Privacy Policy</a>
                 </li>
             </ul>
         </div>

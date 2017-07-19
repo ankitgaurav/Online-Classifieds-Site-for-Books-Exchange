@@ -26,8 +26,12 @@ else{
  $one=1;
 $user_id=$_SESSION["user_id"];
 $sql190 = "SELECT * FROM chats WHERE (to_user='$user_id' and displayble='$one' and to_user_read=0) ";
-$result190 = mysqli_query($conn,$sql190) or mysqli_error($conn);
-$_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
+if($result190 = mysqli_query($conn,$sql190)){
+  $_SESSION['no_of_unread_msg']= mysqli_num_rows($result190);
+}else{
+  $_SESSION['no_of_unread_msg']=0;
+}
+
 $no_of_msg=$_SESSION['no_of_unread_msg'];
 //end of code for unread messages
 }
@@ -40,8 +44,8 @@ $no_of_msg=$_SESSION['no_of_unread_msg'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="styles/default_lp.css">   
-    <link rel="stylesheet" href="footer.css">    
+    <link rel="stylesheet" href="styles/default_lp.css">
+    <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="jquery-1.11.2.min.js"></script>
     <script src="bootstrap.min.js"></script>
@@ -82,7 +86,7 @@ $no_of_msg=$_SESSION['no_of_unread_msg'];
 <script>
         function save_user_info(){
                 var name = edit_form.name.value;
-                var institution = edit_form.institution.value;                
+                var institution = edit_form.institution.value;
                 var city = edit_form.city.value;
                 var dashboard = "dashboard";
                 var xmlhttp = new XMLHttpRequest();
@@ -251,14 +255,14 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                                     <a href='book_details.php?p_id=".$posts['post_id']."' role='button'style='margin-right:5px;margin-left:5px;float:right;' class='btn btn-sm btn-default '>See Post</a>&nbsp;
                                     <div name='confirm_box' id=".$posts['post_id']." style='display:none;'><hr>
                                     <div class='alert alert-warning text-center' style='background-color:white;'>
-                                    
+
                                     Do you really want to delete this post?<br><a onclick='delete_post(".$posts['post_id'].")' href='#' role='' class='btn btn-sm btn-primary'>Yes</a>&nbsp;<a href='#' onclick='hide_confirm_delete(".$posts['post_id'].")' role='button' class='btn btn-sm btn-default'>No</a>
                                     </div>
                                     </div>
                                     </td></tr>";
                             }
                             echo '</table></div>';
-                            
+
                         }
 //showing Book Requests here
                         elseif($_REQUEST["to"]=="book_requests"){
@@ -273,7 +277,7 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                     ?>
                             <span style="font-size:20px;">My Profile</span><span style="padding-left:10px;"><a href="#" class="" id="reply_btn"  data-toggle="modal" data-target="#edit_modal"> <i class="fa fa-edit"></i> Edit</a></span><hr>
                     <?php
-                            
+
                             echo "<div class='well'><span class='profile_labels'>Name: </span><span class='profile_values'>"
                             .$user_info["name"].
                                 "</span><hr><span class='profile_labels'>Email: </span><span class='profile_values'>"
@@ -286,7 +290,7 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                         }
                     ?>
                 </div>
-                </div>                   
+                </div>
                 </div>
             </div>
                         <!-- Reply Modal Starts Here -->
@@ -1440,14 +1444,14 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
             <a href="#" class="btn btn-primary pull-right" onclick="save_user_info()">Save <i class="fa fa-arrow-right"></i></a>
         </form>
       </div>
-      <div class="modal-footer">        
+      <div class="modal-footer">
       </div>
     </div>
   </div>
 </div><!-- Reply Modal Ends Here -->
-          
+
         </article>
-    </div> 
+    </div>
      <div id="footer">
         <div class="container">
         <div class="row">
@@ -1488,10 +1492,10 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                         Feedback
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                    
+
                 <div class="row_heading">Legal</div>
                 <ul>
                     <li><a href="terms">
@@ -1503,17 +1507,17 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                         Privacy
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                
+
                     <div class="row_heading">
                         Connect with Handybooks
                     </div>
-                <ul>    
+                <ul>
                     <li>
                     <a href="http://twitter.com/handybooksin"><span>
-                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp; 
+                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp;
                     </span>Follow us on twitter
                     </a>
                     </li>
@@ -1530,7 +1534,7 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
                         Digg on Google+
                     </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
         </div>
         <div class="row">
@@ -1541,6 +1545,6 @@ echo "<div class='error_msg alert alert-success fade in'><a href='#' class='clos
             <i>Happy Reading...</i>
         </div>
         </div>
-    </div>     
+    </div>
     </body>
 </html>

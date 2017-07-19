@@ -11,7 +11,7 @@ if (isset($_GET["p_id"]))
     }
   else
     {
-    header('Location:home');
+    header('Location:indes.php');
     }
 
 $sql1 = "SELECT * FROM post WHERE post_id='$post_id'";
@@ -42,7 +42,7 @@ $poster_id = $poster_details["user_id"];
         display: none;
     }
     </style>
-    
+
     </head>
     <body>
 <div id="fb-root"></div>
@@ -61,7 +61,7 @@ $poster_id = $poster_details["user_id"];
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-                <a href="home" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
+                <a href="index.php" onmouseover = "document.getElementById('in').style.visibility='visible'" onmouseout = "document.getElementById('in').style.visibility='hidden'" class="logo_text">
                     <strong>handybooks</strong>
                     <small id="in" style="visibility:hidden;">.in</small>
                 </a>
@@ -78,19 +78,19 @@ $poster_id = $poster_details["user_id"];
             </form>
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-        <a href="post_a_book" class="btn btn-primary navbar-btn navbar-left" style="margin-right:5px;">Sell a Book</a>
+        <a href="post_ad11.php" class="btn btn-primary navbar-btn navbar-left" style="margin-right:5px;">Sell a Book</a>
         <?php
 
 if (isset($_SESSION["email"]))
     {
-    echo '<li><a href="messages"><i class="fa fa-comments"></i> Messages</a></li>
-        
+    echo '<li><a href="messages.php"><i class="fa fa-comments"></i> Messages</a></li>
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> ' . $_SESSION["name"] . '<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="dashboard">Profile</a></li>
-            <li><a href="dashboard?to=transactions">Transactions</a></li>
-            <li><a href="dashboard?to=book_requests">Book Requests</a></li>
+            <li><a href="dashboard.php">Profile</a></li>
+            <li><a href="dashboard.php?to=transactions">Transactions</a></li>
+            <li><a href="dashboard.php?to=book_requests">Book Requests</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="auth.php">Logout</a></li>
           </ul>
@@ -102,10 +102,10 @@ if (isset($_SESSION["email"]))
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> Sign In<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li class="dropdown-header">Existing User</li>
-            <li><a href="login">Log In</a></li>
+            <li><a href="login.php">Log In</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">New User</li>
-            <li><a href="signup">Register</a></li>
+            <li><a href="signup.php">Register</a></li>
           </ul>
         </li>';
     }
@@ -132,7 +132,7 @@ if ($book_details['user_id'] == 1)
 
 if (isset($_SESSION['user_id']) && $book_details['user_id'] == $_SESSION['user_id'])
     {
-    echo '<a type="button" class="btn btn-info pull-right" id="reply_btn" href="dashboard?to=transactions"><i class="fa fa-edit"></i> Manage</a>';
+    echo '<a type="button" class="btn btn-info pull-right" id="reply_btn" href="dashboard.php?to=transactions"><i class="fa fa-edit"></i> Manage</a>';
     }
   else
     {
@@ -296,9 +296,9 @@ if ($book_details['user_id'] != 1)
             <div id="report_success" style="display:inline-block"></div>
             </div>
             </div>
-            </div>            
+            </div>
 <!-- Book Info Dialog Ends Here -->
-            
+
             <!-- Reply Modal Starts Here -->
             <div id="reply_modal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
@@ -346,7 +346,7 @@ echo $book_details["post_name"]; ?>&quot;. Reply when available."></textarea>
             <a href="#" class="btn btn-primary pull-right" onclick="sendMessage()">Send <i class="fa fa-arrow-right"></i></a>
         </form>
       </div>
-      <div class="modal-footer">        
+      <div class="modal-footer">
       </div>
     </div>
   </div>
@@ -360,7 +360,7 @@ echo $book_details["post_name"]; ?>&quot;. Reply when available."></textarea>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Confirm Order</h4>
       </div>
-      <div class="modal-body" id="modal-body">        
+      <div class="modal-body" id="modal-body">
             <?php
 
 if (isset($_SESSION['user_id']))
@@ -472,7 +472,7 @@ if (isset($_SESSION['user_id']))
 ?>
         </div>
       </div>
-      <div class="modal-footer">        
+      <div class="modal-footer">
       </div>
     </div>
   </div>
@@ -488,11 +488,11 @@ if (isset($_SESSION['user_id']))
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
                 <div class="row_heading">Handybooks</div>
                 <ul>
-                    <li><a href="about_us">
+                    <li><a href="about_us.php">
                         About us
                         </a>
                     </li>
-                    <li><a href="our_story">
+                    <li><a href="our_story.php">
                         Our story
                     </li>
                     <!-- <li>
@@ -509,45 +509,45 @@ if (isset($_SESSION['user_id']))
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
                 <div class="row_heading">Support</div>
                 <ul>
-                    <li><a href="how_it_works">
+                    <li><a href="how_it_works.php">
                         Get started
                         </a>
                     </li>
                     <li>
-                    <a href="contact">
+                    <a href="contact.php">
                         Contact
                         </a>
                     </li>
-                    <li><a href="feedback">
+                    <li><a href="feedback.php">
                         Feedback
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                    
+
                 <div class="row_heading">Legal</div>
                 <ul>
-                    <li><a href="terms">
+                    <li><a href="terms.php">
                         Terms and Conditions
                         </a>
                     </li>
                     <li>
-                    <a href="privacy">
+                    <a href="privacy.php">
                         Privacy
                         </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-                
+
                     <div class="row_heading">
                         Connect with Handybooks
                     </div>
-                <ul>    
+                <ul>
                     <li>
                     <a href="http://twitter.com/handybooksin"><span>
-                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp; 
+                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp;
                     </span>Follow us on twitter
                     </a>
                     </li>
@@ -564,11 +564,11 @@ if (isset($_SESSION['user_id']))
                         Digg on Google+
                     </a>
                     </li>
-                </ul>   
+                </ul>
             </div>
         </div>
         <div class="row">
-            <a href="home" onmouseover = "document.getElementsByClassName("in").style.visibility='visible'" onmouseout = "document.getElementsByClassName("in").style.visibility='hidden'" class="logo_text">
+            <a href="index.php" onmouseover = "document.getElementsByClassName("in").style.visibility='visible'" onmouseout = "document.getElementsByClassName("in").style.visibility='hidden'" class="logo_text">
                 <strong>handybooks</strong>
                 <small class="in">.in</small>
             </a>

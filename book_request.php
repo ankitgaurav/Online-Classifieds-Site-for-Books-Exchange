@@ -37,7 +37,7 @@ include ('files/config.php');
         $form = true;
         $msg = "Sorry, your request could not be processed.<br> Please try again in a bit.";
       }
-      
+
     }
     else{
       $msg = "Please fill all the fields.<br>";
@@ -71,18 +71,18 @@ if($form==true){
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <?php 
+            <?php
               //code for unread messages
               if (isset($_SESSION['no_of_unread_msg']) && $_SESSION['no_of_unread_msg']!=0)
               {
                 $no_of_msg= $_SESSION['no_of_unread_msg'];
-              } 
+              }
               else {
                 $no_of_msg=0;
               };
               //end of code for unread messages
               if(isset($_SESSION["user_id"]))
-              { 
+              {
                 echo '
                 <li><a href="home"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="messages"><i class="fa fa-comments"></i> Messages';
@@ -90,7 +90,7 @@ if($form==true){
                 {
                         echo "<span class='badge'>".$no_of_msg."</span>";
                 };
-                echo '</a></li>        
+                echo '</a></li>
                   <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-has-popup="true" role="button"><i class="fa fa-user"></i> '.$_SESSION["name"].'
                   <span class="caret"></span></a>
@@ -128,7 +128,7 @@ $msg</div>";
         <hr>
         <h4>Fill in the details of the book you want and we will fetch the book in 2-3 business days.</h4>
           <div>
-            <div> 
+            <div>
               <form class="form-horizontal" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <!-- <div class="form-group">
                   <label for="title" class="col-sm-3 control-label">Request for:</label>
@@ -231,7 +231,7 @@ $msg</div>";
                 </div>';
                 }
                 ?>
-                
+
                 <div class="form-group">
                   <label for="Phone" class="col-sm-3 control-label"><i class="fa fa-2x fa-mobile"></i> Phone Number</label>
                   <div class="col-sm-9">
@@ -244,7 +244,7 @@ $msg</div>";
                    <input type="submit" role="button" class="btn btn-primary  form-control" id="Submit-btn" name="Submit-btn" value="Submit your Order">
                   </div>
                 </div>
-                  
+
               </form>
             </div>
           </div>
@@ -293,10 +293,10 @@ $msg</div>";
               Feedback
                         </a>
             </li>
-          </ul> 
+          </ul>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
-            
+
           <div class="row_heading">Legal</div>
           <ul>
             <li><a href="terms">
@@ -308,16 +308,16 @@ $msg</div>";
               Privacy
                         </a>
             </li>
-          </ul> 
+          </ul>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6 footer_columns">
         <div class="row_heading">
                     Connect with Handybooks
         </div>
-          <ul>  
+          <ul>
             <li>
                     <a href="http://twitter.com/handybooksin"><span>
-                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp; 
+                    <i class="fa fa-twitter fa-2x"></i>&nbsp;&nbsp;
                     </span>Follow us on twitter
                     </a>
             </li>
@@ -334,7 +334,7 @@ $msg</div>";
               Digg on Google+
                     </a>
             </li>
-          </ul> 
+          </ul>
         </div>
       </div>
         <div class="row">

@@ -1,9 +1,9 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "handybooks";
+$servername = "mysql.hostinger.in";
+$username = "u866362918_raj";
+$password = "rvsankumckv";
+$db = "u866362918_handy";
 $home = "http://www.handybooks.in";
 $conn = new mysqli($servername, $username, $password, $db);
 

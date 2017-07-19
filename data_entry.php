@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $form = false;
   	header('Location:data_entry.php');
   }
-  else 
+  else
   {
     $form = true;
     echo "Something went wrong. Data could not be inserted properly" . $conn->error;
@@ -62,11 +62,11 @@ if($form == true){
                       <div class="col-sm-6"><label for="book_author">Author</label>
                         <input id="book_author" class="input-md form-control" type="text"  name="b_author">
                       </div>
-                    </div> 
+                    </div>
                     <div class="form-group">
                       <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#college">College&nbsp;</a></li>
-                        
+
                       </ul>
                     </div>
                     <div class="tab-content">
@@ -82,7 +82,7 @@ if($form == true){
                                 <option>Fourth Year</option>
                                   <option>Fifth Year</option>
                               </select>
-                          </div>        
+                          </div>
                           <div class="col-sm-6"><label for="book_department">Department</label>
                             <input class="input-md col-md-4 form-control" list="b_departments" type="text"  name="b_department" >
                             <datalist id="b_departments">
@@ -134,7 +134,7 @@ if($form == true){
                               <option>Eleven</option>
                               <option>Twelve</option>
                             </select>
-                          </div>        
+                          </div>
                           <div class="col-sm-6"><label for="book_subject">Subject</label>
                             <input class="input-md col-md-4 form-control" type="text"  name="b_subject" >
                           </div>
@@ -147,8 +147,8 @@ if($form == true){
                     </div>
                     <div class="row form-group">
                     <div class="col-md-4">
-                    <div class="col-md-4"> 
-                    </div>                      
+                    <div class="col-md-4">
+                    </div>
                     <div class="col-md-4"><div class="input-group"><span class="input-group-addon">
                       <input type="radio" name="optradio" value="Sell" checked> Sell &#x20b9;</span>
                       <input type="number" min="0" max="2000" step="10" class="form-control" name="b_price">
@@ -162,7 +162,7 @@ if($form == true){
             </div>
           </div>
         </div>
-      </div>              
+      </div>
     </div>
   </body>
 </html>
